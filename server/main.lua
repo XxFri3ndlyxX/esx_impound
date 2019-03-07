@@ -23,7 +23,7 @@ ESX.RegisterServerCallback('esx_impound:get_vehicle_list', function(source, cb)
   MySQL.Async.fetchAll("SELECT * FROM impounded_vehicles WHERE owner=@identifier",{['@identifier'] = xPlayer.getIdentifier()}, function(data)
     for _,v in pairs(data) do
       local vehicle = json.decode(v.vehicle)
-      table.insert(vehicles, {vehicle = vehicle, state = v.state, can_release = VehicleEligableForRelease(v)})
+      table.insert(vehicles, {vehicle = vehicle, stored = v.stored, can_release = VehicleEligableForRelease(v)})
     end
     cb(vehicles)
   end)
@@ -87,7 +87,7 @@ function ProcessImpoundment(plate, current_time, vehicles)
     })
 
     -- Delete vehicle from garage
-    MySQL.Async.execute("DELETE FROM owned_vehicles WHERE id=@id LIMIT 1", {['@id'] = vehicle.id})
+    MySQL.Async.execute("DELETE FROM owned_vehicles WHERE plate=@plate LIMIT 1", {['@plate'] = vehicle.plate})
   end
 end
 
@@ -109,7 +109,7 @@ function RetrieveVehicle(plate)
     for index, vehicle in pairs(vehicles) do
       -- Insert vehicle into owned_vehicles table
       if Config.OwnedVehiclesHasPlateColumn then
-        MySQL.Async.execute("INSERT INTO `owned_vehicles` (`plate`, `vehicle`, `owner`, `state`) VALUES(@plate, @vehicle, @owner, '0')",
+        MySQL.Async.execute("INSERT INTO `owned_vehicles` (`plate`, `vehicle`, `owner`, `stored`) VALUES(@plate, @vehicle, @owner, '0')",
           {
             ['@plate'] = plate,
             ['@vehicle'] = vehicle.vehicle,
@@ -117,7 +117,7 @@ function RetrieveVehicle(plate)
           }
         )
       else
-        MySQL.Async.execute("INSERT INTO `owned_vehicles` (`vehicle`, `owner`, `state`) VALUES(@vehicle, @owner, '0')",
+        MySQL.Async.execute("INSERT INTO `owned_vehicles` (`vehicle`, `owner`, `stored`) VALUES(@vehicle, @owner, '0')",
           {
             ['@vehicle'] = vehicle.vehicle,
             ['@owner'] = vehicle.owner
