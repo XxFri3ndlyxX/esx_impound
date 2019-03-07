@@ -9,7 +9,7 @@ Config = {
 }
 
 -- Set to true if you are using a "plate" column on your owned_vehicles table (such as when using esx_migrate)
-Config.OwnedVehiclesHasPlateColumn = false
+Config.OwnedVehiclesHasPlateColumn = true
 
 -- Determines if the ability to impound vehicles is based upon esx jobs
 Config.RestrictImpoundToJobs = true
@@ -30,12 +30,12 @@ Config.UserMustWaitElapsedTime = true
 Config.UserMustPayFine = true
 
 -- The amount of the fine the user must pay
-Config.ImpoundFineAmount = 10
+Config.ImpoundFineAmount = 10000
 
 
 -- The time in minutes before a user is able to retrieve a vehicle from the
 -- impound lot.
-Config.ElapsedTimeBeforeRelease = 0
+Config.ElapsedTimeBeforeRelease = 60
 
 
 Config.ImpoundLots = {
