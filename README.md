@@ -8,15 +8,11 @@ or by using the /impound command.
 
 # Requirements
 ESX
-esx_eden_garage
+esx_advancedgarage
 
 # Installation
 
-Run inside of your server-data/resources folder
-
-```
-git clone git@github.com:michaelhodgejr/esx_impound.git [esx]/esx_impound
-```
+Add it to your server-data/resources folder
 
 Add to your server.cfg file
 
@@ -27,7 +23,7 @@ start esx_impound
 Create your config file from the default.
 
 ```
-  cp config.default config.lua
+  Edit config.lua
 ```
 
 Add any additional impound lots that you want in the config file. An example impound lot is below.
@@ -68,36 +64,10 @@ SandyAirField = {
 Review and execute the esx_impound.sql file. If you wish to add additional impound locations you can do that
 by adding appropriate entries to the config file.
 
-# Upgrading
-__1.2.1 -> 1.3.0__
-
-Add the new configuration options to your config file
-
 ```
 -- Set to true if you are using a "plate" column on your owned_vehicles table (such as when using esx_migrate)
 Config.OwnedVehiclesHasPlateColumn = false
 ```
 
-Execute the following SQL statements
+Execute the SQL statements
 
-```
-ALTER TABLE `impounded_vehicles` ADD COLUMN `plate` VARCHAR(12) NULL DEFAULT NULL AFTER `id`;
-ALTER TABLE `impounded_vehicles` ADD INDEX `plate` (`plate`);
-```
-
-
-__1.1.0 -> 1.2.0__
-
-Add the new configuration options to your config file
-
-```
--- Determines if the ability to impound vehicles is based upon esx jobs
-Config.RestrictImpoundToJobs = true
-
--- Determines if the ability to retrieve vehicles is based upon esx jobs
-Config.RestrictRetrievalToJobs = false
-
--- The jobs that are able to retrieve vehicles
-Config.RetrievalJobs = {'unemployed'}
-
-```
