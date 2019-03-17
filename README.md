@@ -69,5 +69,3 @@ by adding appropriate entries to the config file.
 Config.OwnedVehiclesHasPlateColumn = false
 ```
 
-Execute the SQL statements
-
