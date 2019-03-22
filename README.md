@@ -68,4 +68,5 @@ by adding appropriate entries to the config file.
 -- Set to true if you are using a "plate" column on your owned_vehicles table (such as when using esx_migrate)
 Config.OwnedVehiclesHasPlateColumn = false
 ```
-
+<br>
+Join my discord channel https://discord.gg/xncafqk
