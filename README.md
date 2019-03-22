@@ -2,7 +2,11 @@
 
 ESX Impound is a plugin that adds impound lots around the map. Users must either wait a specified amount of time, or pay a fine, or both
 before retrieving their vehicle (configurable)
-
+<br>
+<br>
+Join XxFri3ndlyxX discord channel https://discord.gg/xncafqk
+<br>  
+<br>
 If the users have the appropriate job (as defined in the config file) then they are able to impound a vehicle by driving it to the impound lot directly
 or by using the /impound command.
 
